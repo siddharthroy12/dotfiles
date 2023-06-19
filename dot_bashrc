@@ -1,0 +1,35 @@
+#
+# ~/.bashrc
+#
+
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+alias ls='ls --color=auto'
+alias grep='grep --color=auto'
+PS1='[\u@\h \W]\$ '
+
+export PATH="$PATH:/home/siddharthroy/.local/bin"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# Performance mode
+alias cpugetavail='cat /sys/devices/system/cpu/cpu*/cpufreq/scaling_available_governors'
+alias cpushowcurrent='cat /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor'
+alias cpusethigh='echo performance | sudo tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor'
+alias gpushowcurrent='cat /sys/class/drm/card0/device/power_dpm_force_performance_level'
+alias gpusethigh='sudo sh -c "echo high > /sys/class/drm/card0/device/power_dpm_force_performance_level"'
+
+# Youtube
+alias download-music='yt-dlp --extract-audio --audio-format mp3 --embed-thumbnail --add-metadata -o "~/Music/%(title)s.%(ext)s"'
+
+# JOB
+alias emcavpn='sudo openvpn --config ~/Documents/EMCA/VPN/emca.ovpn --auth-user-pass ~/Documents/EMCA/VPN/authfile.txt'
+alias testssh="ssh -i ~/Downloads/4px@test.pem 4px@test.4pointx.com"
+alias demossh="ssh -i ~/Downloads/4px@demo.pem 4px@demo.4pointx.com" 
+
+eval "$(thefuck --alias)"
+
+eval "$(starship init bash)"
